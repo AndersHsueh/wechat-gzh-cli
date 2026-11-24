@@ -13,10 +13,19 @@ import (
 func newCustomerCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "customer-msg",
-		Short: "客服消息",
-		Long:  "向用户发送客服消息。",
+		Short: "客服消息与客服管理",
+		Long:  "客服消息发送、客服账号管理、会话控制与聊天记录。",
 	}
 	cmd.AddCommand(newCustomerSendCmd())
+	for _, sub := range newCustomerAccountCmds() {
+		cmd.AddCommand(sub)
+	}
+	for _, sub := range newCustomerSessionCmds() {
+		cmd.AddCommand(sub)
+	}
+	for _, sub := range newCustomerMsgExtCmds() {
+		cmd.AddCommand(sub)
+	}
 	return cmd
 }
 
@@ -68,7 +77,7 @@ func newCustomerSendCmd() *cobra.Command {
 			"用户与公众号 48 小时内有过交互(否则需用 get-session... 或客服会话)。",
 		},
 		PostConditions: []string{"stdout 输出 ok;消息推送到用户会话。"},
-		Idempotency:    "NO. 每次调用发送新消息。" ,
+		Idempotency:    "NO. 每次调用发送新消息。",
 		Atomicity:      "Atomic. 单次 POST。",
 		SideEffects:    []string{"用户收到一条客服消息。"},
 		CommonErrors: []ErrSpec{

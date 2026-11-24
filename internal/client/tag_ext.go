@@ -7,8 +7,8 @@ import (
 
 // TagFansResult 标签下粉丝列表返回。
 type TagFansResult struct {
-	Count  int    `json:"count"`
-	Data   struct {
+	Count int `json:"count"`
+	Data  struct {
 		OpenID []string `json:"openid"`
 	} `json:"data"`
 	NextOpenID string `json:"next_openid"`

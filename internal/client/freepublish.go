@@ -16,8 +16,8 @@ func (c *Client) PublishSubmit(ctx context.Context, mediaID string) (string, err
 
 // PublishStatus 发布状态下发的文章详情。
 type PublishStatus struct {
-	PublishID    int64 `json:"publish_id"`
-	PublishState int   `json:"publish_status"`
+	PublishID     int64 `json:"publish_id"`
+	PublishState  int   `json:"publish_status"`
 	ArticleDetail *struct {
 		Count int              `json:"count"`
 		Items []map[string]any `json:"item_detail_list"`
@@ -36,9 +36,9 @@ type PublishBatchResult struct {
 	TotalCount int `json:"total_count"`
 	ItemCount  int `json:"item_count"`
 	Item       []struct {
-		ArticleID string            `json:"article_id"`
-		Content   map[string]any    `json:"content,omitempty"`
-		UpdateTime int64            `json:"update_time"`
+		ArticleID  string         `json:"article_id"`
+		Content    map[string]any `json:"content,omitempty"`
+		UpdateTime int64          `json:"update_time"`
 	} `json:"item"`
 }
 

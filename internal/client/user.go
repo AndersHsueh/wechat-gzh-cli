@@ -26,9 +26,9 @@ type UserInfo struct {
 
 // FollowerResult 关注用户列表返回。
 type FollowerResult struct {
-	Total   int    `json:"total"`
-	Count   int    `json:"count"`
-	Data    struct {
+	Total int `json:"total"`
+	Count int `json:"count"`
+	Data  struct {
 		OpenID []string `json:"openid"`
 	} `json:"data"`
 	NextOpenID string `json:"next_openid"`

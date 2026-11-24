@@ -13,10 +13,16 @@ func newUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "user",
 		Short: "用户管理",
-		Long:  "用户信息查询与关注者列表。",
+		Long:  "用户信息查询、批量信息、备注、黑名单与 openid 转换。",
 	}
 	cmd.AddCommand(newUserInfoCmd())
 	cmd.AddCommand(newUserFollowersCmd())
+	for _, sub := range newUserExtCmds() {
+		cmd.AddCommand(sub)
+	}
+	for _, sub := range newUserBlacklistCmds() {
+		cmd.AddCommand(sub)
+	}
 	return cmd
 }
 

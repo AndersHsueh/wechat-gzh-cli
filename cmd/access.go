@@ -45,16 +45,16 @@ func newAccessCmd() *cobra.Command {
 			"stdout 输出 access_token(默认纯文本,--json 输出 JSON)。",
 			"获得的 access_token 在 7200 秒内有效,内部会缓存,重复调用不重复请求。",
 		},
-		Idempotency:    "YES. 同一凭证有效期内重复调用返回同一/等效 token,不产生副作用(普通模式不刷新)。",
-		Atomicity:      "Atomic. 单次 GET 请求,失败不产生任何状态变更。",
-		SideEffects:    []string{"无外部可见副作用;获取的是只读调用凭据。"},
+		Idempotency: "YES. 同一凭证有效期内重复调用返回同一/等效 token,不产生副作用(普通模式不刷新)。",
+		Atomicity:   "Atomic. 单次 GET 请求,失败不产生任何状态变更。",
+		SideEffects: []string{"无外部可见副作用;获取的是只读调用凭据。"},
 		CommonErrors: []ErrSpec{
 			{Code: "40013", Desc: "invalid appid", Fix: "检查 WX_GZ_AppID。"},
 			{Code: "40125", Desc: "invalid secret", Fix: "检查 WX_GZ_AppSecret。"},
 			{Code: "40164", Desc: "IP not in whitelist", Fix: "把当前出口 IP 加入后台白名单。"},
 		},
-		Scope:      "仅需公众号后台的开发者权限(无需额外 OAuth 网页授权 scope)。",
-		RateLimit:  "受公众号 access_token 获取频率限制(普通模式 2000 次/日,稳定版 1 万次/分钟);本工具做了缓存,通常无需担心。",
+		Scope:     "仅需公众号后台的开发者权限(无需额外 OAuth 网页授权 scope)。",
+		RateLimit: "受公众号 access_token 获取频率限制(普通模式 2000 次/日,稳定版 1 万次/分钟);本工具做了缓存,通常无需担心。",
 		RaceConditions: []string{
 			"多进程同时首次获取时可能各取一个 token,两者均有效,不冲突。",
 		},
@@ -94,20 +94,20 @@ func newServerIPCmd() *cobra.Command {
 	cmd.Flags().BoolVar(&jsonOut, "json", false, "以 JSON 输出")
 	addAgentHelpFlag(cmd)
 	registerAgentHelp("wechat-gzh-cli server-ip", RenderAgentHelp(AgentHelpDoc{
-		Command:         "wechat-gzh-cli server-ip",
-		Summary:         "获取微信 API 服务器(api.weixin.qq.com)IP 地址列表,用于防火墙放行或 IP 比对。",
-		PreConditions:   []string{"已配置 WX_GZ_AppID/WX_GZ_AppSecret。"},
-		PostConditions:  []string{"stdout 输出 IP 列表(每行一个,或 --json 输出 {\"ip_list\":[...]})。"},
-		Idempotency:     "YES. 只读查询,不产生副作用。",
-		Atomicity:       "Atomic. 单次 GET。",
-		SideEffects:     []string{"无。"},
-		CommonErrors:    []ErrSpec{{Code: "44002", Desc: "empty post data", Fix: "重试。"}},
-		Scope:           "开发者权限即可。",
-		RateLimit:       "常规;建议每日调用一次以获得最新 IP 列表。",
-		RaceConditions:  []string{"IP 列表可能随时间变化,勿长期缓存。"},
-		Orchestration:   "可据此配置防火墙/白名单后,再调用其它业务接口。",
-		ParsingHints:    "--json 输出 {\"ip_list\":[\"1.2.3.4\",...]}。",
-		Examples:        []string{"wechat-gzh-cli server-ip --json"},
+		Command:        "wechat-gzh-cli server-ip",
+		Summary:        "获取微信 API 服务器(api.weixin.qq.com)IP 地址列表,用于防火墙放行或 IP 比对。",
+		PreConditions:  []string{"已配置 WX_GZ_AppID/WX_GZ_AppSecret。"},
+		PostConditions: []string{"stdout 输出 IP 列表(每行一个,或 --json 输出 {\"ip_list\":[...]})。"},
+		Idempotency:    "YES. 只读查询,不产生副作用。",
+		Atomicity:      "Atomic. 单次 GET。",
+		SideEffects:    []string{"无。"},
+		CommonErrors:   []ErrSpec{{Code: "44002", Desc: "empty post data", Fix: "重试。"}},
+		Scope:          "开发者权限即可。",
+		RateLimit:      "常规;建议每日调用一次以获得最新 IP 列表。",
+		RaceConditions: []string{"IP 列表可能随时间变化,勿长期缓存。"},
+		Orchestration:  "可据此配置防火墙/白名单后,再调用其它业务接口。",
+		ParsingHints:   "--json 输出 {\"ip_list\":[\"1.2.3.4\",...]}。",
+		Examples:       []string{"wechat-gzh-cli server-ip --json"},
 	}))
 	return cmd
 }
@@ -129,4 +129,13 @@ func writeJSON(v any) error {
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "  ")
 	return enc.Encode(v)
+}
+
+// parseJSONMap 把字符串反序列化为 map;非法 JSON 返回带说明的错误。
+func parseJSONMap(s string) (map[string]any, error) {
+	var m map[string]any
+	if err := json.Unmarshal([]byte(s), &m); err != nil {
+		return nil, fmt.Errorf("不是合法 JSON: %w", err)
+	}
+	return m, nil
 }

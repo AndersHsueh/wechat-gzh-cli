@@ -76,8 +76,8 @@ func newMessageMassSendCmd() *cobra.Command {
 			{Code: "45028", Desc: "no masssend quota", Fix: "周期内发表次数用完。"},
 			{Code: "40007", Desc: "invalid media_id", Fix: "图文 media_id 无效。"},
 		},
-		Scope:        "需要公众号服务号的群发/消息权限。",
-		RateLimit:    "受每日发表次数与频率限制(详见错误码 45009/45011)。",
+		Scope:     "需要公众号服务号的群发/消息权限。",
+		RateLimit: "受每日发表次数与频率限制(详见错误码 45009/45011)。",
 		RaceConditions: []string{
 			"群完结果经回调推送 MASSSENDJOBFINISH,勿轮询误判;msg_data_id 用于图文数据接口。",
 		},

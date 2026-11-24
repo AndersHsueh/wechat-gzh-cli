@@ -7,7 +7,7 @@ import (
 
 // SelfMenu 查询自定义菜单信息返回(含官网后台设置的菜单)。
 type SelfMenu struct {
-	IsMenuOpen  int `json:"is_menu_open"`
+	IsMenuOpen   int `json:"is_menu_open"`
 	SelfmenuInfo struct {
 		Button []map[string]any `json:"button"`
 	} `json:"selfmenu_info"`

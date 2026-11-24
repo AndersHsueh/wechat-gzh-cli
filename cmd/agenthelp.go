@@ -17,20 +17,20 @@ type ErrSpec struct {
 
 // AgentHelpDoc 是 --agent-help 输出的结构化内容(遵循双界面 CLI 设计的 11 维度模板)。
 type AgentHelpDoc struct {
-	Command         string   // 命令路径,如 "wechat-gzh-cli material list"
-	Summary         string   // 一句话功能
-	PreConditions   []string // 1. 前置条件
-	PostConditions  []string // 2. 后置条件
-	Idempotency     string   // 3. 幂等性
-	Atomicity       string   // 4. 原子性
-	SideEffects     []string // 5. 副作用
-	CommonErrors    []ErrSpec // 6. 常见错误与恢复
-	Scope           string   // 7. 权限范围(OAuth scope)
-	RateLimit       string   // 8. 频率限制
-	RaceConditions  []string // 9. 竞态条件
-	Orchestration   string   // 10. 编排提示(下一步做什么)
-	ParsingHints    string   // 11. 解析提示(如何解析输出,含 jq 示例)
-	Examples        []string // 可直接复制运行的示例
+	Command        string    // 命令路径,如 "wechat-gzh-cli material list"
+	Summary        string    // 一句话功能
+	PreConditions  []string  // 1. 前置条件
+	PostConditions []string  // 2. 后置条件
+	Idempotency    string    // 3. 幂等性
+	Atomicity      string    // 4. 原子性
+	SideEffects    []string  // 5. 副作用
+	CommonErrors   []ErrSpec // 6. 常见错误与恢复
+	Scope          string    // 7. 权限范围(OAuth scope)
+	RateLimit      string    // 8. 频率限制
+	RaceConditions []string  // 9. 竞态条件
+	Orchestration  string    // 10. 编排提示(下一步做什么)
+	ParsingHints   string    // 11. 解析提示(如何解析输出,含 jq 示例)
+	Examples       []string  // 可直接复制运行的示例
 }
 
 func bullet(items []string) string {

@@ -16,16 +16,16 @@ type CallbackCheckResult struct {
 
 // DNSItem DNS 解析结果项。
 type DNSItem struct {
-	IP         string `json:"ip"`
+	IP           string `json:"ip"`
 	RealOperator string `json:"real_operator"`
 }
 
 // PingItem ping 检测结果项。
 type PingItem struct {
-	IP          string `json:"ip"`
+	IP           string `json:"ip"`
 	FromOperator string `json:"from_operator"`
-	PackageLoss string `json:"package_loss"`
-	Time        string `json:"time"`
+	PackageLoss  string `json:"package_loss"`
+	Time         string `json:"time"`
 }
 
 // StableAccessToken 获取稳定版接口调用凭据(POST /cgi-bin/stable_token)。

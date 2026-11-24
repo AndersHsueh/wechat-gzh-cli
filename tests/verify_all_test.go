@@ -37,6 +37,29 @@ func TestVerifyAll(t *testing.T) {
 		// 发布
 		"publish_submit":            TestPublishSubmit,
 		"publish_get":               TestPublishGet,
+		// prd-3 客服
+		"add_kf_account":            TestAddKfAccount,
+		"get_kf_list":               TestGetKfList,
+		"create_kf_session":         TestCreateKfSession,
+		"get_kf_session":            TestGetKfSession,
+		"get_msg_list":              TestGetMsgList,
+		"send_typing":               TestSendTyping,
+		"get_wait_case":             TestGetWaitCase,
+		// prd-3 用户
+		"batch_user_info":           TestBatchUserInfo,
+		"get_blacklist":             TestGetBlacklist,
+		"batch_blacklist":           TestBatchBlacklist,
+		"change_openid":             TestChangeOpenID,
+		// prd-3 datacube
+		"datacube_query":            TestDatacubeQuery,
+		// prd-3 评论
+		"open_comment":              TestOpenComment,
+		"list_comment":              TestListComment,
+		"mark_elect":                TestMarkElect,
+		"reply_comment":             TestReplyComment,
+		// prd-3 jsapi / 就医助手
+		"jsapi_ticket":              TestGetJSSDKTicket,
+		"send_channel_msg":          TestSendChannelMsg,
 	}
 
 	for name, fn := range units {

@@ -24,10 +24,10 @@ type NewsItem struct {
 
 // MaterialItem 素材列表项。
 type MaterialItem struct {
-	MediaID    string    `json:"media_id"`
-	Name       string    `json:"name"`
-	URL        string    `json:"url"`
-	UpdateTime int64     `json:"update_time"`
+	MediaID    string `json:"media_id"`
+	Name       string `json:"name"`
+	URL        string `json:"url"`
+	UpdateTime int64  `json:"update_time"`
 	Content    *struct {
 		NewsItem []NewsItem `json:"news_item"`
 	} `json:"content,omitempty"`
