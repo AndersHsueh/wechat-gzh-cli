@@ -8,7 +8,7 @@ import (
 )
 
 // AppVersion 版本号,与 git tag 保持一致(仅末位递增)。
-var AppVersion = "v0.0.4"
+var AppVersion = "v0.0.5"
 
 // agentDocRegistry 记录每个已注册命令的 --agent-help 状态,供根命令总览。
 type agentDocEntry struct {
