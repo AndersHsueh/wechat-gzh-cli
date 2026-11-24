@@ -54,11 +54,22 @@ func newJSSDKTicketCmd() *cobra.Command {
 	return cmd
 }
 
-// newHospitalMsgCmd 就医助手消息推送。
+// newHospitalMsgCmd 就医助手命令组。
 func newHospitalMsgCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "hospital-msg",
+		Short: "微信就医助手",
+		Long:  "医疗服务公众号的定向消息推送。",
+	}
+	cmd.AddCommand(newHospitalMsgSendCmd())
+	return cmd
+}
+
+// newHospitalMsgSendCmd 就医助手消息推送。
+func newHospitalMsgSendCmd() *cobra.Command {
 	var bodyJSON string
 	cmd := &cobra.Command{
-		Use:   "hospital-msg send --body '{...}'",
+		Use:   "send --body '{...}'",
 		Short: "就医助手消息推送",
 		Args:  AgentHelpAwareArgs(cobra.NoArgs, nil),
 		RunE: func(c *cobra.Command, _ []string) error {

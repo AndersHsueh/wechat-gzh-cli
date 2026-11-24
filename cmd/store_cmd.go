@@ -73,14 +73,23 @@ func newStoreSubCmd(ep client.WxaEndpoint) *cobra.Command {
 		example += " --body '{\"poi_id\":\"P001\"}'"
 	}
 	example += " --json"
+
+	preCond := "无需请求体。"
+	if ep.NeedBody {
+		preCond = "--body 必填(" + ep.BodyHint + ")。"
+	}
+	sideEffect := "无。"
+	if ep.NeedBody {
+		sideEffect = "可能创建/修改/删除门店或小程序数据。"
+	}
 	registerAgentHelp("wechat-gzh-cli store "+ep.Name, RenderAgentHelp(AgentHelpDoc{
 		Command:        example,
 		Summary:        ep.Summary + "。",
-		PreConditions:  []string{"已配置鉴权。", preCondForStore(ep)},
+		PreConditions:  []string{"已配置鉴权。", preCond},
 		PostConditions: []string{"stdout 输出接口返回字段,或 --json 输出完整结构。"},
 		Idempotency:    "见接口语义:查询类只读 YES;写操作类 NO。",
 		Atomicity:      "Atomic. 单次 POST。",
-		SideEffects:    []string{sideEffectForStore(ep)},
+		SideEffects:    []string{sideEffect},
 		CommonErrors:   []ErrSpec{},
 		Scope:          "微信门店/小程序权限。",
 		RateLimit:      "受门店接口配额限制。",
@@ -90,20 +99,4 @@ func newStoreSubCmd(ep client.WxaEndpoint) *cobra.Command {
 		Examples:       []string{example},
 	}))
 	return cmd
-}
-
-// preCondForStore 返回门店子命令的前置条件说明。
-func preCondForStore(ep client.WxaEndpoint) string {
-	if ep.NeedBody {
-		return "--body 必填(" + ep.BodyHint + ")。"
-	}
-	return "无需请求体。"
-}
-
-// sideEffectForStore 返回门店子命令的副作用说明。
-func sideEffectForStore(ep client.WxaEndpoint) string {
-	if ep.NeedBody {
-		return "可能创建/修改/删除门店或小程序数据。"
-	}
-	return "无。"
 }

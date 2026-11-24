@@ -43,7 +43,7 @@ func TestClientAccessToken(t *testing.T) {
 	defer srv.Close()
 
 	c := client.New(client.Config{
-		AppID:    "wx_appid",
+		AppID:     "wx_appid",
 		AppSecret: "secret",
 		BaseURL:   srv.URL,
 	})
@@ -63,7 +63,7 @@ func TestClientAccessTokenErrcode(t *testing.T) {
 	defer srv.Close()
 
 	c := client.New(client.Config{
-		AppID:    "wx_appid",
+		AppID:     "wx_appid",
 		AppSecret: "secret",
 		BaseURL:   srv.URL,
 	})

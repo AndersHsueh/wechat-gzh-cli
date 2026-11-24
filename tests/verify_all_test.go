@@ -7,68 +7,70 @@ import "testing"
 func TestVerifyAll(t *testing.T) {
 	units := map[string]func(*testing.T){
 		// 鉴权
-		"access_token":              TestClientAccessToken,
-		"access_token_errcode":      TestClientAccessTokenErrcode,
-		"access_token_cached":       TestClientAccessTokenCached,
+		"access_token":         TestClientAccessToken,
+		"access_token_errcode": TestClientAccessTokenErrcode,
+		"access_token_cached":  TestClientAccessTokenCached,
 		// 基础
-		"get_api_domain_ip":         TestGetApiDomainIP,
-		"get_material_count":        TestGetMaterialCount,
-		"get_temp_media":            TestGetTempMedia,
-		"stable_access_token":       TestStableAccessToken,
-		"get_api_quota":             TestGetApiQuota,
-		"get_callback_ip":           TestGetCallbackIP,
+		"get_api_domain_ip":   TestGetApiDomainIP,
+		"get_material_count":  TestGetMaterialCount,
+		"get_temp_media":      TestGetTempMedia,
+		"stable_access_token": TestStableAccessToken,
+		"get_api_quota":       TestGetApiQuota,
+		"get_callback_ip":     TestGetCallbackIP,
 		// 素材
-		"batch_get_material":        TestBatchGetMaterial,
-		"upload_image":              TestUploadImage,
+		"batch_get_material": TestBatchGetMaterial,
+		"upload_image":       TestUploadImage,
 		// 客服
-		"send_customer_message":     TestSendCustomerMessage,
+		"send_customer_message": TestSendCustomerMessage,
 		// 标签
-		"list_tags":                 TestListTags,
-		"tag_get_fans":              TestTagGetFans,
-		"batch_tagging":             TestBatchTagging,
+		"list_tags":     TestListTags,
+		"tag_get_fans":  TestTagGetFans,
+		"batch_tagging": TestBatchTagging,
 		// 菜单
-		"add_conditional_menu":      TestAddConditionalMenu,
+		"add_conditional_menu": TestAddConditionalMenu,
 		// 消息
-		"subscribe_send":            TestSubscribeSend,
-		"get_autoreply":             TestGetAutoreply,
+		"subscribe_send": TestSubscribeSend,
+		"get_autoreply":  TestGetAutoreply,
 		// 草稿
-		"draft_add":                 TestDraftAdd,
-		"draft_batch_get":           TestDraftBatchGet,
+		"draft_add":       TestDraftAdd,
+		"draft_batch_get": TestDraftBatchGet,
 		// 发布
-		"publish_submit":            TestPublishSubmit,
-		"publish_get":               TestPublishGet,
+		"publish_submit": TestPublishSubmit,
+		"publish_get":    TestPublishGet,
 		// prd-3 客服
-		"add_kf_account":            TestAddKfAccount,
-		"get_kf_list":               TestGetKfList,
-		"create_kf_session":         TestCreateKfSession,
-		"get_kf_session":            TestGetKfSession,
-		"get_msg_list":              TestGetMsgList,
-		"send_typing":               TestSendTyping,
-		"get_wait_case":             TestGetWaitCase,
+		"add_kf_account":    TestAddKfAccount,
+		"get_kf_list":       TestGetKfList,
+		"create_kf_session": TestCreateKfSession,
+		"get_kf_session":    TestGetKfSession,
+		"get_msg_list":      TestGetMsgList,
+		"send_typing":       TestSendTyping,
+		"get_wait_case":     TestGetWaitCase,
 		// prd-3 用户
-		"batch_user_info":           TestBatchUserInfo,
-		"get_blacklist":             TestGetBlacklist,
-		"batch_blacklist":           TestBatchBlacklist,
-		"change_openid":             TestChangeOpenID,
+		"batch_user_info": TestBatchUserInfo,
+		"get_blacklist":   TestGetBlacklist,
+		"batch_blacklist": TestBatchBlacklist,
+		"change_openid":   TestChangeOpenID,
 		// prd-3 datacube
-		"datacube_query":            TestDatacubeQuery,
+		"datacube_query": TestDatacubeQuery,
 		// prd-3 评论
-		"open_comment":              TestOpenComment,
-		"list_comment":              TestListComment,
-		"mark_elect":                TestMarkElect,
-		"reply_comment":             TestReplyComment,
+		"open_comment":  TestOpenComment,
+		"list_comment":  TestListComment,
+		"mark_elect":    TestMarkElect,
+		"reply_comment": TestReplyComment,
 		// prd-3 jsapi / 就医助手
-		"jsapi_ticket":              TestGetJSSDKTicket,
-		"send_channel_msg":          TestSendChannelMsg,
+		"jsapi_ticket":     TestGetJSSDKTicket,
+		"send_channel_msg": TestSendChannelMsg,
 		// prd-4 智能接口
-		"translate_content":         TestTranslateContent,
-		"ocr_query":                 TestOcrQuery,
-		"voice_to_text":             TestVoiceToText,
-		"voice_result":              TestVoiceResult,
-		"get_jssdk_raw_voice":       TestGetJSSDKRawVoice,
+		"translate_content":   TestTranslateContent,
+		"ocr_query":           TestOcrQuery,
+		"voice_to_text":       TestVoiceToText,
+		"voice_result":        TestVoiceResult,
+		"get_jssdk_raw_voice": TestGetJSSDKRawVoice,
 		// prd-4 门店 / 客服头像
-		"wxa_query":                 TestWxaQuery,
-		"upload_kf_headimg":         TestUploadKfHeadimg,
+		"wxa_query":         TestWxaQuery,
+		"upload_kf_headimg": TestUploadKfHeadimg,
+		// 双界面可达性(三条法则全命令回归)
+		"agent_help_reachable": TestAgentHelpReachable,
 	}
 
 	for name, fn := range units {
