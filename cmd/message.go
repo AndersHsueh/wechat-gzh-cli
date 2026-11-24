@@ -18,6 +18,10 @@ func newMessageCmd() *cobra.Command {
 	}
 	cmd.AddCommand(newMessageMassSendCmd())
 	cmd.AddCommand(newMessageMassStatusCmd())
+	cmd.AddCommand(newMessageMassDeleteCmd())
+	cmd.AddCommand(newMessageSpeedGetCmd())
+	cmd.AddCommand(newMessageSpeedSetCmd())
+	cmd.AddCommand(newMessagePreviewCmd())
 	return cmd
 }
 

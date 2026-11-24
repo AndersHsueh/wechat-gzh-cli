@@ -13,10 +13,16 @@ func newTagCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "tag",
 		Short: "用户标签管理",
-		Long:  "标签列表与创建。",
+		Long:  "标签的增删改查与用户批量打/取标签。",
 	}
 	cmd.AddCommand(newTagListCmd())
 	cmd.AddCommand(newTagCreateCmd())
+	cmd.AddCommand(newTagUpdateCmd())
+	cmd.AddCommand(newTagDeleteCmd())
+	cmd.AddCommand(newTagGetFansCmd())
+	cmd.AddCommand(newTagBatchCmd(true))
+	cmd.AddCommand(newTagBatchCmd(false))
+	cmd.AddCommand(newTagOfUserCmd())
 	return cmd
 }
 

@@ -22,6 +22,8 @@ func newMaterialCmd() *cobra.Command {
 	cmd.AddCommand(newMaterialDeleteCmd())
 	cmd.AddCommand(newMaterialUploadTempCmd())
 	cmd.AddCommand(newMaterialUploadImgCmd())
+	cmd.AddCommand(newMaterialCountCmd())
+	cmd.AddCommand(newMaterialGetTempCmd())
 	return cmd
 }
 

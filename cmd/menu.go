@@ -19,6 +19,10 @@ func newMenuCmd() *cobra.Command {
 	cmd.AddCommand(newMenuCreateCmd())
 	cmd.AddCommand(newMenuListCmd())
 	cmd.AddCommand(newMenuDeleteCmd())
+	cmd.AddCommand(newMenuSelfCmd())
+	cmd.AddCommand(newMenuAddConditionalCmd())
+	cmd.AddCommand(newMenuDelConditionalCmd())
+	cmd.AddCommand(newMenuTryMatchCmd())
 	return cmd
 }
 

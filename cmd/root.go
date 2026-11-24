@@ -8,7 +8,7 @@ import (
 )
 
 // AppVersion 版本号,与 git tag 保持一致(仅末位递增)。
-var AppVersion = "v0.0.1"
+var AppVersion = "v0.0.2"
 
 // agentDocRegistry 记录每个已注册命令的 --agent-help 状态,供根命令总览。
 type agentDocEntry struct {
@@ -49,6 +49,14 @@ func NewRootCmd() *cobra.Command {
 	root.AddCommand(newTagCmd())
 	root.AddCommand(newMenuCmd())
 	root.AddCommand(newCustomerCmd())
+	root.AddCommand(newOpenapiCmd())
+	root.AddCommand(newDraftCmd())
+	root.AddCommand(newPublishCmd())
+	root.AddCommand(newSubscribeCmd())
+	root.AddCommand(newAutoreplyCmd())
+	root.AddCommand(newStableTokenCmd())
+	root.AddCommand(newCallbackCheckCmd())
+	root.AddCommand(newPushServerIPCmd())
 
 	// 注册根命令覆盖清单(契约)
 	registerAgentHelp("wechat-gzh-cli", "")
