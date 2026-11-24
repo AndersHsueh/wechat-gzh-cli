@@ -139,3 +139,25 @@ func parseJSONMap(s string) (map[string]any, error) {
 	}
 	return m, nil
 }
+
+// printMapFlat 以 "key=value" 形式扁平打印 map 顶层字段,用于结构化结果的文本展示。
+// 嵌套值保留为格式化 JSON。
+func printMapFlat(c *cobra.Command, m map[string]any) {
+	for k, v := range m {
+		switch val := v.(type) {
+		case string:
+			fmt.Fprintf(c.OutOrStdout(), "%s=%s\n", k, val)
+		case float64:
+			fmt.Fprintf(c.OutOrStdout(), "%s=%v\n", k, val)
+		case bool:
+			fmt.Fprintf(c.OutOrStdout(), "%s=%v\n", k, val)
+		default:
+			b, err := json.Marshal(v)
+			if err != nil {
+				fmt.Fprintf(c.OutOrStdout(), "%s=%v\n", k, v)
+				continue
+			}
+			fmt.Fprintf(c.OutOrStdout(), "%s=%s\n", k, string(b))
+		}
+	}
+}

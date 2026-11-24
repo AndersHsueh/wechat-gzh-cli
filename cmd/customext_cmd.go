@@ -287,6 +287,52 @@ func newCustomerAccountCmds() []*cobra.Command {
 		add(cmd)
 	}
 
+	// account-upload-headimg
+	{
+		cmd := &cobra.Command{
+			Use:   "account-upload-headimg --kf-account xxx --file ./img.jpg",
+			Short: "设置客服头像",
+			Args:  AgentHelpAwareArgs(cobra.NoArgs, nil),
+			RunE: func(c *cobra.Command, _ []string) error {
+				if agentHelpShortcut(c) {
+					return nil
+				}
+				kf, _ := c.Flags().GetString("kf-account")
+				file, _ := c.Flags().GetString("file")
+				if kf == "" || file == "" {
+					return fmt.Errorf("--kf-account 与 --file 必填")
+				}
+				return runWithClient(c, func(ctx context.Context, cl *client.Client) error {
+					if err := cl.UploadKfHeadimg(ctx, kf, file); err != nil {
+						return err
+					}
+					fmt.Fprintln(c.OutOrStdout(), "ok")
+					return nil
+				})
+			},
+		}
+		cmd.Flags().String("kf-account", "", "完整客服账号")
+		cmd.Flags().String("file", "", "本地头像图片路径")
+		addAgentHelpFlag(cmd)
+		registerAgentHelp("wechat-gzh-cli customer-msg account-upload-headimg", RenderAgentHelp(AgentHelpDoc{
+			Command:        "wechat-gzh-cli customer-msg account-upload-headimg --kf-account test1@test --file ./a.jpg",
+			Summary:        "设置客服账号头像(以 multipart 上传图片)。",
+			PreConditions:  []string{"已配置鉴权。", "--kf-account/--file 必填。"},
+			PostConditions: []string{"stdout 输出 ok;客服头像已更新。"},
+			Idempotency:    "NO.",
+			Atomicity:      "Atomic.",
+			SideEffects:    []string{"客服头像被替换。"},
+			CommonErrors:   []ErrSpec{{Code: "61450", Desc: "头像系统异常", Fix: "重试。"}},
+			Scope:          "客服权限。",
+			RateLimit:      "常规。",
+			RaceConditions: []string{"无。"},
+			Orchestration:  "完善客服形象。",
+			ParsingHints:   "文本输出 ok。",
+			Examples:       []string{"wechat-gzh-cli customer-msg account-upload-headimg --kf-account test1@test --file ./a.jpg"},
+		}))
+		add(cmd)
+	}
+
 	return cmds
 }
 

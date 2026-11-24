@@ -24,6 +24,7 @@ func newMaterialCmd() *cobra.Command {
 	cmd.AddCommand(newMaterialUploadImgCmd())
 	cmd.AddCommand(newMaterialCountCmd())
 	cmd.AddCommand(newMaterialGetTempCmd())
+	cmd.AddCommand(newMaterialGetJSSDKVoiceCmd())
 	return cmd
 }
 

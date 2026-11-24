@@ -60,6 +60,15 @@ func TestVerifyAll(t *testing.T) {
 		// prd-3 jsapi / 就医助手
 		"jsapi_ticket":              TestGetJSSDKTicket,
 		"send_channel_msg":          TestSendChannelMsg,
+		// prd-4 智能接口
+		"translate_content":         TestTranslateContent,
+		"ocr_query":                 TestOcrQuery,
+		"voice_to_text":             TestVoiceToText,
+		"voice_result":              TestVoiceResult,
+		"get_jssdk_raw_voice":       TestGetJSSDKRawVoice,
+		// prd-4 门店 / 客服头像
+		"wxa_query":                 TestWxaQuery,
+		"upload_kf_headimg":         TestUploadKfHeadimg,
 	}
 
 	for name, fn := range units {
