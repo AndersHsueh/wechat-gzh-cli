@@ -1,0 +1,10 @@
+# Karpathy Wiki 知识库
+/raw/
+/wiki/
+/outputs/
+
+# Go 构建产物
+/wechat-gzh-cli
+*.exe
+*.test
+*.out
